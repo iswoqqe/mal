@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <readline.h>
 
 std::string& READ(std::string& input)
 {
@@ -24,12 +25,11 @@ std::string& rep(std::string& input)
 int main()
 {
     const std::string prompt = "user> ";
+    const std::string history_file = "~/.mal_history";
+
     std::string input;
+    ReadLine readline(history_file);
 
-    std::cout << prompt;
-
-    while (std::getline(std::cin, input)) {
+    while (readline.get(prompt, input))
         std::cout << rep(input) << std::endl;
-        std::cout << prompt;
-    }
 }
